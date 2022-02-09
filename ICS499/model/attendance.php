@@ -2,20 +2,11 @@
 
 class Attendance {
 
-    private $date;
     private $status;
     private $employeeID;
 
     function __construct() {
 
-    }
-
-    public function setDate($date) {
-        $this->date = $date;
-    }
-
-    public function getDate() {
-        return $this->date;
     }
 
     public function setStatus($status) {

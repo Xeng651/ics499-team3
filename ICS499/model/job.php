@@ -1,6 +1,6 @@
 <?php 
 
-class Attendance {
+class Job {
 
     private $title;
     private $rate;

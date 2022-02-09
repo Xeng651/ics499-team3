@@ -46,11 +46,10 @@ include 'includes/autoLoader.php';
     **/
 
     //$employeeContr->createEmployee($employee);
-    
 
     //$employeeContr->removeEmployee(7);
-
     
+    /** 
     $employee->setFirstName("Bob");
     $employee->setLastName("Hanks");
     $employee->setBirthDate(date("Y-m-d", strtotime("1999-02-02")));
@@ -62,11 +61,31 @@ include 'includes/autoLoader.php';
     $employee->setPhoto("Billy.png");
     $employee->setDeptID(1);
     $employee->setJobID(1);
-    
     $employeeID = 1;
+    **/
 
-    $employeeContr->updateEmployee($employee, $employeeID)
+    //$employeeContr->updateEmployee($employee, $employeeID);
     
+    $salaryContr = new SalaryContr();
+    $salary = new Salary();
+
+    /** 
+    $salary->setGrossPay(1);
+    $salary->setBankName("USA");
+    $salary->setNetPay(1);
+    $salary->setEmployeeID(1);
+    $salary->setDeptID(1);
+    **/
+
+    //$salaryContr->createSalary($salary);
+
+    $salaries = $salaryContr->selectAllSalaries();
+    foreach ($salaries as $salary) {
+        echo "bank name: ". $salary['bank_name'];
+        echo "<br>";
+    }
+
+    //$salaryContr->removeSalary(1);
 
     ?>
 </body>

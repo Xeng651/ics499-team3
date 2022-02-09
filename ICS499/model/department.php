@@ -1,6 +1,6 @@
 <?php 
 
-class Attendance {
+class Department {
 
     private $name;
 

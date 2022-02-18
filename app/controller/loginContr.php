@@ -15,7 +15,7 @@ class LoginContr extends LoginSec {
                 exit();
             } else {
                 header("Location: ../view/login.php?login=invalid");
-           exit();
+                exit();
             }
         }
     }

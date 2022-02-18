@@ -43,7 +43,6 @@ include '../includes/autoLoader.php';
     **/
     
     $loginContr = new LoginContr();
-    echo $loginContr->checkLoginCred("", "");
 
     /** 
     $admin = new Admin();

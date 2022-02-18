@@ -17,35 +17,14 @@
 
         $userEmail = $emailAddress;
 
-        $sql = "DELETE FROM passReset WHERE passResetEmail=?";
-        $stmt = mysqli_stmt_init($pdo_con);
-        if(!mysqli_stmt_prepare($stmt, $sqli)){
-            header("Location: ../view/forgot-password.php?reset=stmtfail");
-            exit();
-        }
-        else{
-            mysqli_stmt_bind_param($stmt, "s", $userEmail);
-            mysqli_stmt_execute($stmt);
-        }
-        
+        $hashedToken = password_hash($token, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO passReset (passResetEmail, passResetSelector, passResetToken, passResetExpires) VALUES (?, ?, ?, ?);";
+        include'../repository/resetPassModel.php';
 
-        $stmt = mysqli_stmt_init($pdo_con);
-        if(!mysqli_stmt_prepare($stmt, $sqli)){
-            header("Location: ../view/forgot-password.php?reset=stmtfail");
-            exit();
-        }
-        else{
+        $reset_entity = new resetRequests();
+        $reset_entity->storeToken($userEmail, $selector, $hashedToken, $expires);
 
-            $hashedToken = password_hash($token, PASSWORD_DEFAULT);
-
-            mysqli_stmt_bind_param($stmt, "ssss", $userEmail, $selector, $hashedToken, $expires);
-            mysqli_stmt_execute($stmt);
-        }
-        mysqli_stmt_close($stmt);
-        mysqli_close($pdo_con);
-
+        header("Location:../view/reset-password.php");
 
      }
 

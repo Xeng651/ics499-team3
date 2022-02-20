@@ -8,9 +8,16 @@
 
         }
 
-        public function deleteToken(){
+        public function deleteToken($passResetEmail){
             $query = "DELETE FROM passReset WHERE passResetEmail=?";
             $stmt = $this->connect()->prepare($query);
+            $stmt->execute([$passResetEmail]);
+        }
+
+        public function deleteExisting($passResetEmail){
+            $query = "DELETE FROM passReset WHERE passResetEmail=?";
+            $stmt = $this->connect()->prepare($query);
+            $stmt->execute([$passResetEmail]);
         }
     }
 

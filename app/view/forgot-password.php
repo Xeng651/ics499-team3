@@ -69,9 +69,6 @@
                                     echo "<div class='alert alert-danger text-center'> 
                                     Invalid Email Address! </div>";
                                     exit();
-                                } elseif($resetCheck =="sent"){
-                                    echo "<div class='alert alert-success text-center'> 
-                                    We have sent a notice to the email address. </div>";
                                 }
                             }
                             ?>

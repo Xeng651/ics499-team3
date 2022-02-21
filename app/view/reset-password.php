@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,75 +19,98 @@
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<body>
-<div class="container">
 
-<!-- Outer Row -->
-<div class="row justify-content-center">
+<body class="bg-secondary">
 
-    <div class="col-xl-10 col-lg-12 col-md-9">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-6 d-lg-block"><img src="../img/pw_lock.jpg" class="img-fluid" style="height: 100%;"></div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Reset Password</h1>
-                            </div>
-                            <form class="user" action="../includes/resetInc.php" method="POST">
-                                <div class="form-group">
+
+<?php
+/**
+ * Check if the selector and token are valid.
+ * if the selector and tokens are empty tell them their params are incorrect
+ * if they are not empty and are the correct hexa decimals, do nothing.
+ */
+
+
+?>
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-lg-block"><img src="../img/pw_lock.jpg" class="img-fluid" style="height: 100%;"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Reset Password</h1>
+                                    </div>
+                                    <form class="user" action="../includes/newPWInc.php" method="POST">
+                                        <div class="form-group">
+                                            <?php
+                                            if (isset($_GET['newpass'])) {
+                                                $newPW = $_GET['newpass'];
+                                                echo '<input type="password" name="newpass" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter New Password" value="' . $newPW . '">';
+                                            } else {
+                                                echo ' <input type="password" name="newpass" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter New Password">';
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="repassword" class="form-control form-control-user" id="exampleInputPassword" placeholder="Re:New Password">
+
+                                            <input type="hidden" name="email" class="email-for-reset" id="target-email" value="<?php $email = $_GET["email"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" name="code" class="form-control form-control-user" max="999999" id="exampleInputPassword" placeholder="Enter Code">
+
+                                        </div>
+                                        <input type="submit" name="resetpw" value="Reset" class="btn btn-primary btn-user btn-block"></input>
+                                        <hr>
+                                    </form>
+                                    <div class="text-center">
+                                        <a class="small" href="login.php">Cancle</a>
+                                    </div>
+                                    <hr>
                                     <?php
-                                    if (isset($_GET['pass'])) {
-                                        $newPass = $_GET['pass'];
-                                        echo '<input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." value="' . $newPass . '">';
+                                    if (!isset($_GET['resetpw'])) {
+                                        exit();
                                     } else {
-                                        echo ' <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">';
+                                        $pwCheck = $_GET['resetpw'];
+
+                                        if ($pwCheck == "empty") {
+                                            echo "<div class='alert alert-danger text-center' role='alert'> 
+                                            All Fields Are Required! </div>";
+                                            exit();
+                                        } elseif ($pwCheck == "invalid") {
+                                            echo "<div class='alert alert-danger text-center'> 
+                                            Your parameters are invalid, please try again or please request for another link! </div>";
+                                            exit();
+                                        }elseif($pwCheck == "sent"){
+                                            echo "<div class='alert alert-success text-center'> 
+                                            We have sent a notice to the email address. </div>";
+                                            exit();
+                                        }
                                     }
                                     ?>
                                 </div>
-                                <input type="submit" name="submit" value="Reset" class="btn btn-primary btn-user btn-block"></input>
-                                <hr>
-                            </form>
-                            <div class="text-center">
-                                <a class="small" href="login.php">Go Back</a>
                             </div>
-                            <hr>
-                            <?php
-                            if (!isset($_GET['submit'])) {
-                                exit();
-                            } else {
-                                $resetCheck = $_GET['submit'];
-
-                                if ($resetCheck == "submit") {
-                                    echo "<div class='alert alert-danger text-center' role='alert'> 
-                                    All Fields Are Required! </div>";
-                                    exit();
-                                } elseif ($resetCheck == "invalid") {
-                                    echo "<div class='alert alert-danger text-center'> 
-                                    Invalid Email Address! </div>";
-                                    exit();
-                                } elseif($resetCheck =="sent"){
-                                    echo "<div class='alert alert-success text-center'> 
-                                    We have sent a notice to the email address. </div>";
-                                }
-                            }
-                            ?>
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
     </div>
 
-</div>
-
-</div>
-
 </body>
-
 
 </html>

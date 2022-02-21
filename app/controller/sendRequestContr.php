@@ -9,16 +9,11 @@
          * 
          */
 
-        $selector = bin2hex(random_bytes(8));
-        $token = random_bytes(32);
-
-        $url = "http://localhost/ICS499/ics499-team3/app/view/reset-password.php?selector=".$selector."&validator=".bin2hex($token);
+        $verification_code = rand(100000, 999999);
 
         $expires = date("U") + 900;
 
         $userEmail = $emailAddress;
-
-        $hashedToken = password_hash($token, PASSWORD_DEFAULT);
 
         include'../repository/resetPassModel.php';
         include'../controller/createMailContro.php';
@@ -39,13 +34,13 @@
          $reset_entity->deleteExisting($userEmail);
       //   }
 
-        $reset_entity->storeToken($userEmail, $selector, $hashedToken, $expires);
+        $reset_entity->storeToken($userEmail, $expires, $verification_code);
         
         $mail_entity = new mailController();
 
-        $mail_entity->createMail($userEmail, $url);
+        $mail_entity->createMail($userEmail, $verification_code);
 
-        header("Location:../view/reset-password.php");
+        
 
      }
 

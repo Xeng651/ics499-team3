@@ -15,7 +15,7 @@ class resetContr extends LoginSec {
                     include '../controller/sendRequestContr.php';       
                     $sendContr = new sendRequests();
                     $sendContr->sendPassReset($emailAddress);
-                    header("Location: ../view/forgot-password.php?reset=sent");
+                    header("Location: ../view/reset-password.php?pwCheck=sent&email=$emailAddress");
                     exit();
                 }
                 else{

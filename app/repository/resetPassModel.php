@@ -1,6 +1,6 @@
 <?php
 
-    class resetRequests extends Database{
+    class resetPassModel extends Database{
         public function storeToken($passResetEmail, $passResetExpires, $passCode){
             $query = "INSERT INTO passReset (passResetEmail, passResetExpires, passResetCode) VALUES (?, ?, ?);";
             $stmt = $this->connect()->prepare($query);
@@ -24,14 +24,11 @@
          * check the DB for the code and email address, if they both exist return true, else return false.
          */
         public function validateCode($code, $email){
-            $query = "SELECT * FROM passreset WHERE passResetEmail = ? and passResetCode = ?";
+            $query = "SELECT passResetCode FROM passreset WHERE passResetEmail = ? AND passResetCode = ?";
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$email, $code]);
-            if(!empty($query)){
-                return true;
-            } else{
-                return false;
-            }
+            $results = $stmt->fetchAll();
+            return $results;
         }
         public function updatePW($email, $new_pass){
             $query = "UPDATE employee SET emp_password = ? WHERE email_address = ?";

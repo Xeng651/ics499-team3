@@ -1,5 +1,5 @@
 <?php
- class sendRequests{
+ class sendRequestContr{
      public function sendPassReset($emailAddress){
 
 
@@ -26,7 +26,7 @@
          * edit: not working properly so I commented out, right now it deletes the existing token and 
          * replaces it with a new one.
          */
-        $reset_entity = new resetRequests();
+        $reset_entity = new resetPassModel();
       //   if(!$reset_entity->deleteExisting($userEmail)){
       //       echo "There was an error";
       //       exit();

@@ -37,7 +37,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Forgot Password</h1>
                             </div>
-                            <form class="user" action="../includes/resetInc.php" method="POST">
+                            <form class="user" action="../includes/forgetInc.php" method="POST">
                                 <div class="form-group">
                                     <?php
                                     if (isset($_GET['email'])) {

@@ -1,13 +1,23 @@
 <?php  
 
-if (isset($_POST["reset"])) {
+if (isset($_POST["resetpw"])) {
     include '../config/database.php';
     include '../includes/autoLoader.php';
+    include '../controller/resetContr.php';
 
-    $emailAddress = $_POST["email"];
+    $newPass = $_POST["newpass"];
+    $rePass = $_POST["repassword"];
+    $email = $_POST["email"];
+    $code = $_POST["code"];
 
-    $resetContr = new resetContr();
-    $resetContr->validateEmail($emailAddress);
+    echo $email;
+
+    $newPW_entity = new resetContr();
+
+    $newPW_entity->isEmpty($newPass, $rePass, $email, $code);
+    
+
+
 }
 
 ?>

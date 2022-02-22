@@ -51,7 +51,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Reset Password</h1>
                                     </div>
-                                    <form class="user" action="../includes/newPWInc.php" method="POST">
+                                    <form class="user" action="../includes/resetInc.php" method="POST">
                                         <div class="form-group">
                                             <?php
                                             if (isset($_GET['newpass'])) {
@@ -65,7 +65,7 @@
                                         <div class="form-group">
                                             <input type="password" name="repassword" class="form-control form-control-user" id="exampleInputPassword" placeholder="Re:New Password">
 
-                                            <input type="hidden" name="email" class="email-for-reset" id="target-email" value="<?php $email = $_GET["email"]; ?>">
+                                            <input type="hidden" name="email" class="email-for-reset" id="target-email" value="<?php echo $_GET["email"]; ?>">
                                         </div>
                                         <div class="form-group">
                                             <input type="number" name="code" class="form-control form-control-user" max="999999" id="exampleInputPassword" placeholder="Enter Code">

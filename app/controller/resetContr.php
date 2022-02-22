@@ -1,34 +1,34 @@
 <?php
-class resetContr extends LoginSec {
-        public function validateEmail($emailAddress){
-            if ($this->emptyEmail($emailAddress)) {
-                header("Location: ../view/forgot-password.php?reset=empty&email=$emailAddress");
-                exit();
+    class resetContr{
+        public function isEmpty($newpass, $repass, $email, $code){
+            if(empty($newpass) || empty($repass) || empty($code)){
+                header("Location: ../view/reset-password.php?resetpw=empty&email=$email");
+            } else{
+                $this->isValid($newpass, $repass, $email, $code);
+            }
         }
-        else {
-                if ($this->validEmail($emailAddress)){
-                    /**
-                     * if the email exists send an email to the address
-                     * take the user back to the reset page and tell them
-                     * to check their email
-                     */              
-                    include '../controller/sendRequestContr.php';       
-                    $sendContr = new sendRequests();
-                    $sendContr->sendPassReset($emailAddress);
-                    header("Location: ../view/reset-password.php?pwCheck=sent&email=$emailAddress");
-                    exit();
+        /**
+         * Check if the two passwords are the same, if not give them an error, else check if the code exists in the database.
+         * If true, update the new password, if not true give an error.
+         */
+        public function isValid($newpass, $repass, $email, $code){
+            include '../repository/resetPassModel.php';
+            if($newpass == $repass){
+                $reset_entity = new resetPassModel();
+                $result_set = $reset_entity->validateCode($code, $email);
+                if(!empty($result_set)){
+                    $hashed_pw = password_hash($newpass, PASSWORD_DEFAULT);
+                    
+                    $reset_entity->updatePW($email, $hashed_pw);
+                    header("Location: ../view/login.php");
+                } else{
+                    header("Location: ../view/reset-password.php?resetpw=invalid&email=$email");
                 }
-                else{
-                    /**
-                     * if the email does not exist in the database
-                     * redicrect them back to the reset pw page
-                     * and give them an error msg  saying that 
-                     * the email address is invalid
-                     */
-                    header("Location: ../view/forgot-password.php?reset=invalid");
-                    exit();
-                }
+                
+            } else{
+                header("Location: ../view/reset-password.php?resetpw=mismatch&email=$email");
+            }
         }
     }
-}
+
 ?>

@@ -1,10 +1,10 @@
 <?php
 
     class resetPassModel extends Database{
-        public function storeToken($passResetEmail, $passResetExpires, $passCode){
-            $query = "INSERT INTO passReset (passResetEmail, passResetExpires, passResetCode) VALUES (?, ?, ?);";
+        public function storeToken($passResetEmail, $passCode){
+            $query = "INSERT INTO passReset (passResetEmail, passResetCode) VALUES (?, ?);";
             $stmt = $this->connect()->prepare($query);
-            $stmt->execute([$passResetEmail, $passResetExpires, $passCode]);
+            $stmt->execute([$passResetEmail, $passCode]);
 
         }
 

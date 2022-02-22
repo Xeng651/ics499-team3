@@ -11,8 +11,6 @@
 
         $verification_code = rand(100000, 999999);
 
-        $expires = date("U") + 900;
-
         $userEmail = $emailAddress;
 
         include'../repository/resetPassModel.php';
@@ -34,7 +32,7 @@
          $reset_entity->deleteExisting($userEmail);
       //   }
 
-        $reset_entity->storeToken($userEmail, $expires, $verification_code);
+        $reset_entity->storeToken($userEmail, $verification_code);
         
         $mail_entity = new mailController();
 

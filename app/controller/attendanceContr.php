@@ -1,6 +1,6 @@
 <?php
 
-class AttendanceContr extends AttendanceModel {
+class AttendanceContr extends AttendanceService{
 
     public function selectAllAttendances() {
         $attendances = $this->getAllAttendances();
@@ -10,6 +10,10 @@ class AttendanceContr extends AttendanceModel {
     public function selectEmpAttendance($employeeID){
         $result = $this->getEmpAttendance($employeeID);
         return $result;
+    }
+
+    public function showTotalAttendanceByStatus($status) {
+        return $this->getTotalAttendanceByStatus($status);
     }
 
     public function createAttendance($attendance) {

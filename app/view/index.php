@@ -17,32 +17,53 @@ include '../includes/autoLoader.php';
 
 <body>
     <?php
+    
+    // $employee = new Employee();
+    // $employee->setFirstName("Xeng");
+    // $employee->setLastName("Xiong");
+    // $employee->setBirthDate(date("Y-m-d", strtotime("1999-02-02")));
+    // $employee->setGender("Male");
+    // $employee->setEmailAddress("xengxiong123@gmail.com");
+    // $employee->setEmpPassword("Xengxiong123!");
+    // $employee->setAddress("100 North Street, St Paul, MN 55106");
+    // $employee->setPhone("6519991234");
+    // $employee->setRole("Employee");
+    // $employee->setPhoto("employee1.png");
+    // $employee->setDeptID(1);
+    // $employee->setJobID(1);
+    // $employee->setDateJoined(date("Y-m-d", strtotime("1999-02-02")));
 
-    $employeeContr = new EmployeeContr();
-    $employees = $employeeContr->selectAllEmployees();
-    foreach ($employees as $employee) {
-        echo $employee['employee_id']. " - ". $employee['first_name'];
-        echo "<br>";
-    }
+    // $employeeContr = new EmployeeContr();
+    // $employees = $employeeContr->selectAllEmployees();
+    // foreach ($employees as $employee) {
+    //     echo $employee['employee_id']. " - ". $employee['birth_date'];
+    //     echo "<br>";
+    // }
+
+    // $employeeSelected = $employeeContr->selectEmployee(1);
+    // echo $employeeSelected[0]['first_name'];
+    // echo "<br>";
+    
+    $salary_object = new Salary();
+    $salary_object->setEmployeeID(1);
+    $salary_object->setGrossPay(1000);
+    $salary_object->setAllowance(1);
+    $salary_object->setDeduction(1);
+    $salary_object->setBankName("gtr");
+    $salary_object->setDeptID(1);
+    $salary_object->setDate(date('Y-m-d', strtotime('2022-03-11')));
+    echo $salary_object->getDate();
 
     /** 
-    $employee = new Employee();
-    $employee->setFirstName("Xeng");
-    $employee->setLastName("Xiong");
-    $employee->setBirthDate(date("Y-m-d", strtotime("1999-02-02")));
-    $employee->setGender("Male");
-    $employee->setEmailAddress("xengxiong123@gmail.com");
-    $employee->setEmpPassword("Xengxiong123!");
-    $employee->setAddress("100 North Street, St Paul, MN 55106");
-    $employee->setPhone("6519991234");
-    $employee->setRole("Employee");
-    $employee->setPhoto("employee1.png");
-    $employee->setDeptID(1);
-    $employee->setJobID(1);
-    $employeeContr->createEmployee($employee);
-    **/
-    
-    $loginContr = new LoginContr();
+    $leave = new Leave();
+    $leave->setReason("Sick Leave");
+    $leave->setStartDate(date("Y-m-d", strtotime("1995-01-01")));
+    $leave->setEndDate(date("Y-m-d", strtotime("1995-01-01")));
+    $leave->setStatus("Pending");
+    $leave->setEmployeeID(1);
+    $leaveContr = new leaveContr();
+    $leaveContr->createLeave($leave);
+    */
 
     /** 
     $admin = new Admin();
@@ -57,9 +78,6 @@ include '../includes/autoLoader.php';
     $adminContr = new AdminContr();
     $adminContr->createAdmin($admin);
     **/
-
-
-    
 
     ?>
 </body>

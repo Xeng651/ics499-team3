@@ -11,6 +11,12 @@
 
     <title>Login</title>
 
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../../https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -37,7 +43,34 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Sign in</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">
+                                            Sign in</h1>
+                                        <?php
+                                        if (isset($_GET['login'])) {
+                                            $loginCheck = $_GET['login'];
+
+                                            if ($loginCheck == "empty") {
+                                                echo "<div class='alert alert-danger alert-dismissible text-center'> 
+                                                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                                                <strong> All Fields Are Required! </strong>
+                                                </div>";
+                                            } elseif ($loginCheck == "invalid") {
+                                                echo "<div class='alert alert-danger text-center'> 
+                                                Invalid Username or Password! </div>";
+                                            }
+                                        }
+
+                                        if (isset($_GET['logout'])) {
+                                            $loginCheck = $_GET['logout'];
+
+                                            if ($loginCheck == "success") {
+                                                echo "<div class='alert alert-success alert-dismissible text-center'> 
+                                                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                                                <strong> Successfully Logged Out! </strong>
+                                                </div>";
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                     <form class="user" action="../includes/loginInc.php" method="POST">
                                         <div class="form-group">
@@ -60,33 +93,13 @@
                                         <a class="small" href="forgot-password.php">Forgot Password?</a>
                                     </div>
                                     <hr>
-                                    <?php
-                                    if (!isset($_GET['login'])) {
-                                        exit();
-                                    } else {
-                                        $loginCheck = $_GET['login'];
-
-                                        if ($loginCheck == "empty") {
-                                            echo "<div class='alert alert-danger text-center' role='alert'> 
-                                            All Fields Are Required! </div>";
-                                            exit();
-                                        } elseif ($loginCheck == "invalid") {
-                                            echo "<div class='alert alert-danger text-center'> 
-                                            Invalid Username or Password! </div>";
-                                            exit();
-                                        }
-                                    }
-                                    ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
 </body>

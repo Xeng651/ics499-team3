@@ -7,6 +7,7 @@ class Salary {
     private $deduction;
     private $bankName;
     private $netPay;
+    private $date;
     private $employeeID;
     private $deptID;
 
@@ -54,6 +55,14 @@ class Salary {
         return $this->netPay;
     }
 
+    public function setDate($date) {
+        $this->date = $date;
+    }
+
+    public function getDate() {
+        return $this->date;
+    }
+
     public function setEmployeeID($employeeID) {
         $this->employeeID = $employeeID;
     }
@@ -68,6 +77,20 @@ class Salary {
 
     public function getDeptID() {
         return $this->deptID;
+    }
+
+    public function calculateNetPay($grossPay, $allowance, $deduction){
+        return ($grossPay + $allowance) - $deduction;
+    }
+
+    public function checkEmpty($grossPay, $allowance, $deduction, $employeeID, $bankName, $date, $deptID){
+        //if any of the parameters are empty, direct the user back to the add page and give them an error.
+        if(empty($grossPay) || empty($allowance) || empty($deduction) || empty($employeeID) || empty($bankName) || empty($date) || empty($deptID)){
+            return true;
+        }//procceed to the next thing.
+        else{
+            return false;
+        }
     }
 
 }

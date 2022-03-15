@@ -6,6 +6,7 @@ class Admin {
     private $lastName;
     private $birthDate;
     private $gender;
+    private $phone;
     private $emailAddress;
     private $adminPassword;
     private $photo;
@@ -45,6 +46,14 @@ class Admin {
 
     public function getgender() {
         return $this->gender;
+    }
+
+    public function setPhone($phone) {
+        $this->phone = $phone;
+    }
+
+    public function getPhone() {
+        return $this->phone;
     }
 
     public function setEmailAddress($emailAddress) {

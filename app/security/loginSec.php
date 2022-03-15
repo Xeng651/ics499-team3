@@ -4,12 +4,12 @@ session_start();
 
 class LoginSec {
 
-    private $empContr;
-    private $adminContr;
+    private $employeeRepo;
+    private $adminRepo;
 
     function __construct() {
-        $this->empContr = new EmployeeContr();
-        $this->adminContr = new AdminContr();
+        $this->employeeRepo = new EmployeeRepo();
+        $this->adminRepo = new AdminRepo();
     }
 
     protected function emptyInput($emailAddress, $inputedPass) {
@@ -22,7 +22,7 @@ class LoginSec {
 
     protected function validEmpLogin($emailAddress, $inputedPass) {
         $flag = false;
-        $result = $this->empContr->selectEmployeeByEmail($emailAddress);
+        $result = $this->employeeRepo->getEmployeeByEmail($emailAddress);
         if (!empty($result)) {
             $employeeID = $result[0]['employee_id'];
             $password = $result[0]['emp_password'];
@@ -39,7 +39,7 @@ class LoginSec {
 
     protected function validAdminLogin($emailAddress, $inputedPass) {
         $flag = false;
-        $result = $this->adminContr->selectAdminByEmail($emailAddress);
+        $result = $this->adminRepo->getAdminByEmail($emailAddress);
         if (!empty($result)) {
             $adminID = $result[0]['admin_id'];
             $password = $result[0]['admin_password'];
@@ -50,31 +50,6 @@ class LoginSec {
                 $_SESSION['role'] = $role;
                 $flag = true;
             }
-        }
-        return $flag;
-    }
-
-    /**
-     * select employee by email address, if it's not false set flag to true
-     * and return flage else return flag as false.
-     */
-    protected function validEmail($emailAddress){
-        $flag = false;
-        $result = $this->empContr->selectEmployeeByEmail($emailAddress);
-        if (!empty($result)) {
-
-                $flag = true;
-
-        }
-        return $flag;
-    }
-    /**
-     * If the email address is empty return true, if not return false.
-     */
-    protected function emptyEmail($emailAddress) {
-        $flag = false;
-        if (empty($emailAddress)) {
-            $flag = true;
         }
         return $flag;
     }

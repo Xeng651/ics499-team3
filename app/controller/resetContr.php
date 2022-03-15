@@ -1,34 +1,47 @@
 <?php
-    class resetContr{
-        public function isEmpty($newpass, $repass, $email, $code){
-            if(empty($newpass) || empty($repass) || empty($code)){
-                header("Location: ../view/reset-password.php?resetpw=empty&email=$email");
-            } else{
-                $this->isValid($newpass, $repass, $email, $code);
-            }
-        }
-        /**
-         * Check if the two passwords are the same, if not give them an error, else check if the code exists in the database.
-         * If true, update the new password, if not true give an error.
-         */
-        public function isValid($newpass, $repass, $email, $code){
-            include '../repository/resetPassModel.php';
-            if($newpass == $repass){
-                $reset_entity = new resetPassModel();
-                $result_set = $reset_entity->validateCode($code, $email);
-                if(!empty($result_set)){
-                    $hashed_pw = password_hash($newpass, PASSWORD_DEFAULT);
-                    
-                    $reset_entity->updatePW($email, $hashed_pw);
-                    header("Location: ../view/login.php");
-                } else{
-                    header("Location: ../view/reset-password.php?resetpw=invalid&email=$email");
+
+class ResetContr extends resetService {
+
+    public function resetPass($newpass, $repass, $email, $code) {
+        if ($this->isEmpty($newpass, $repass, $code)) {
+            header("Location: ../view/reset-password.php?resetpw=empty&email=$email");
+        } else {
+            if ($this->passIsMatching($newpass, $repass) || $this->isValid($newpass, $email, $code)) {
+                if ($this->passIsMatching($newpass, $repass)) {
+                    if ($this->isValid($newpass, $email, $code)) {
+                        header("Location: ../view/login.php");
+                    } else {
+                        header("Location: ../view/reset-password.php?resetpw=invalidCode&email=$email");
+                    }
+                } else {
+                    header("Location: ../view/reset-password.php?resetpw=mismatch&email=$email");
                 }
-                
-            } else{
-                header("Location: ../view/reset-password.php?resetpw=mismatch&email=$email");
+            } else {
+                header("Location: ../view/reset-password.php?resetpw=invalid&email=$email");
             }
         }
     }
+
+    public function changePass($currentpass, $newpass, $repass, $id) {
+        if ($this->isEmpty($currentpass, $newpass, $repass)) {
+            header("Location: ../view/change-password.php?changepw=empty");
+        } else {
+            if ($this->passIsMatching($newpass, $repass) || $this->isValidPassword($currentpass, $id)) {
+                if ($this->passIsMatching($newpass, $repass)) {
+                    if ($this->isValidPassword($currentpass, $id)) {
+                        $this->updatePW($id, $newpass);
+                        header("Location: ../view/change-password.php?changepw=success");
+                    } else {
+                        header("Location: ../view/change-password.php?changepw=invalidCurrentPass");
+                    }
+                } else {
+                    header("Location: ../view/change-password.php?changepw=mismatch");
+                }
+            } else {
+                header("Location: ../view/change-password.php?changepw=invalid");
+            }
+        }
+    }
+}
 
 ?>

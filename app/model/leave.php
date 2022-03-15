@@ -5,6 +5,7 @@ class Leave {
     private $reason;
     private $startDate;
     private $endDate;
+    private $status;
     private $employeeID;
 
     function __construct() {
@@ -33,6 +34,14 @@ class Leave {
 
     public function getEndDate() {
         return $this->endDate;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+    public function getStatus() {
+        return $this->status;
     }
 
     public function setEmployeeID($employeeID) {

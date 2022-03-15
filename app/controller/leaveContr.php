@@ -1,14 +1,23 @@
 <?php
 
-class LeaveContr extends LeaveModel {
+class LeaveContr extends LeaveService {
 
     public function selectAllLeaves() {
         $leaves = $this->getAllLeaves();
         return $leaves;
     }
 
+    public function showTotalLeaveByStatus($status) {
+        return $this->getTotalLeaveByStatus($status);
+    }
+
     public function createLeave($leave) {
-        $this->setLeave($leave);
+        if ($this->isEmpty($leave)) {
+            header("Location: ../view/add-leave.php?addLeave=empty");
+        } else {
+            $this->setLeave($leave);
+            header("Location: ../view/manage-leave.php");
+        }
     }
 
     public function removeLeave($leaveID) {

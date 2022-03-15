@@ -1,10 +1,10 @@
 <?php
 
-class SalaryContr extends SalaryModel {
+class SalaryContr extends SalaryService {
 
     public function selectAllSalaries() {
-        $employees = $this->getAllSalaries();
-        return $employees;
+        $salaries = $this->getAllSalaries();
+        return $salaries;
     }
 
     public function selectEmpSalary($employeeID){

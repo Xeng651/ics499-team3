@@ -10,6 +10,7 @@ class Employee {
     private $empPassword;
     private $address;
     private $phone;
+    private $dateJoined;
     private $role;
     private $photo;
     private $dept_id;
@@ -35,7 +36,7 @@ class Employee {
         return $this->lastName;
     }
 
-    public function setbirthDate($birthDate) {
+    public function setBirthDate($birthDate) {
         $this->birthDate = $birthDate;
     }
 
@@ -47,7 +48,7 @@ class Employee {
         $this->gender = $gender;
     }
 
-    public function getgender() {
+    public function getGender() {
         return $this->gender;
     }
 
@@ -81,6 +82,14 @@ class Employee {
 
     public function getPhone() {
         return $this->phone;
+    }
+
+    public function setDateJoined($dateJoined) {
+        $this->dateJoined = $dateJoined;
+    }
+
+    public function getDateJoined() {
+        return $this->dateJoined;
     }
 
     public function setRole($role) {

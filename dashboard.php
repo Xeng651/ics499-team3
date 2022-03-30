@@ -234,6 +234,22 @@ if (isset($_SESSION['valid_user'])) {
                         $totalActive = $attendanceContr->showTotalAttendanceByStatus("Active");
 
                         ?>
+                             <div><a class="weatherwidget-io" href="https://forecast7.com/en/44d98n93d27/minneapolis/?unit=us" data-label_1="MINNEAPOLIS" data-label_2="WEATHER" data-font="Roboto" data-theme="original" data-basecolor="#22608b">MINNEAPOLIS WEATHER</a>
+                                <script>
+                                    ! function(d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if (!d.getElementById(id)) {
+                                            js = d.createElement(s);
+                                            js.id = id;
+                                            js.src = 'https://weatherwidget.io/js/widget.min.js';
+                                            fjs.parentNode.insertBefore(js, fjs);
+                                        }
+                                    }(document, 'script', 'weatherwidget-io-js');
+                                </script>
+
+                            </div>
+
+                            <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
                         <!-- Content Row -->
                         <div class="row">
 
@@ -253,22 +269,7 @@ if (isset($_SESSION['valid_user'])) {
                                     </div>
                                 </div>
                             </div>
-                            <div><a class="weatherwidget-io" href="https://forecast7.com/en/44d98n93d27/minneapolis/?unit=us" data-label_1="MINNEAPOLIS" data-label_2="WEATHER" data-font="Roboto" data-theme="original" data-basecolor="#22608b">MINNEAPOLIS WEATHER</a>
-                                <script>
-                                    ! function(d, s, id) {
-                                        var js, fjs = d.getElementsByTagName(s)[0];
-                                        if (!d.getElementById(id)) {
-                                            js = d.createElement(s);
-                                            js.id = id;
-                                            js.src = 'https://weatherwidget.io/js/widget.min.js';
-                                            fjs.parentNode.insertBefore(js, fjs);
-                                        }
-                                    }(document, 'script', 'weatherwidget-io-js');
-                                </script>
 
-                            </div>
-
-                            <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
 
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">

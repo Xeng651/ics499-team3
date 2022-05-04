@@ -28,7 +28,7 @@ class MailContr {
         $mail->Host = "smtp.gmail.com";
         $mail->Port = "587";
         $mail->Username = "no.reply.ics449@gmail.com";
-        $mail->Password = "Knight321fight";
+        $mail->Password = "*********";
 
         $mail->setFrom("no.reply.ics449@gmail.com");
         $mail->Subject = "CSSX Account Notice: Password Verification Code";
@@ -69,7 +69,7 @@ class MailContr {
         $mail->Host = "smtp.gmail.com";
         $mail->Port = "587";
         $mail->Username = "no.reply.ics449@gmail.com";
-        $mail->Password = "Knight321fight";
+        $mail->Password = "**********";
 
         $mail->setFrom("no.reply.ics449@gmail.com");
         $mail->Subject = "CSSX Leave Request Status";
